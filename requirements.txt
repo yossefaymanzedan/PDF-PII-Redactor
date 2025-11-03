@@ -9,8 +9,8 @@ matplotlib>=3.8.4
 gradio>=4.41.0           # UI
 
 # ── Optional: enable NER with Hugging Face (only if you plan to use dslim/bert-base-NER) ──
-# transformers>=4.44.2
-# torch>=2.3.1           # required by transformers for most pipelines (CPU build is fine)
+transformers>=4.44.2
+torch>=2.3.1           # required by transformers for most pipelines (CPU build is fine)
 
 # Note:
 # - You must install the Tesseract OCR engine separately (system package), not via pip.
