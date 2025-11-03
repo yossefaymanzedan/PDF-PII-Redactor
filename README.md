@@ -1,4 +1,4 @@
-# PDF PII Detector & Post-Processor (OCR + NER/regex + Grouping)
+# PDF PII Detector
 
 > **Language scope: English only (current release)**  
 > This build processes documents in **English**. Multi-language OCR and NER are on the roadmap and will be added in a future release.
