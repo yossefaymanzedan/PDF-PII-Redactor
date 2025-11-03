@@ -1,0 +1,67 @@
+# ===== PDF PII Redactor – Config YAML =====
+# Save as: config.yaml
+# Use: python app.py --yaml config.yaml
+
+# --- Global thresholds ---
+DEFAULT_MIN_CONF: 0.90     # Confidence gate used by post-processor (charts, worklists, redaction)
+
+# --- Risk model (weights feed "risk = weight × score") ---
+RISK_WEIGHTS:
+  SSN: 10
+  CREDIT_CARD: 8
+  IBAN: 6
+  EIN: 5
+  DATE: 3
+  PHONE: 2
+  EMAIL: 1
+  LOCATION: 1
+  NAME: 0
+  ORG: 0
+  MISC: 0
+
+# --- Which labels are considered sensitive for redaction/export worklists ---
+TEAM_SENSITIVE:
+  - SSN
+  - CREDIT_CARD
+  - IBAN
+  - EIN
+
+# --- Which labels count as HR contacts (for contacts_hr.csv) ---
+HR_CONTACT_LABELS:
+  - NAME
+  - EMAIL
+  - PHONE
+
+# --- Column mapping for detections_min.csv (don’t change keys on the left) ---
+LABEL_TO_MINCOL:
+  NAME: name
+  EMAIL: email
+  PHONE: phone
+  SSN: ssn
+  CREDIT_CARD: credit
+  IBAN: iban
+  DATE: date
+  LOCATION: location
+  ORG: org
+
+# --- Duplicate/Conflict policy for detections_min.csv values ---
+# mode: "list" → join ALL values; "topk" → keep top K by score
+MIN_DUP_POLICY:
+  mode: list              # list | topk
+  k: 2                    # used only if mode == topk
+  include_confidence: true    # append |score:0.98 to each value
+  include_provenance: true    # append |page:12|block:3 to each value
+  separator: "; "             # joiner when mode == list (or when k>1)
+
+# --- Role email policy (e.g., hr@, info@, …) ---
+ROLE_EMAIL_POLICY:
+  keep_if_adjacent_to_name: true   # keep role emails ONLY when a NAME is on same line/block
+
+# --- Optional: team presets (example only; not read by code unless you swap values above) ---
+# presets:
+#   legal_strict:
+#     DEFAULT_MIN_CONF: 0.95
+#     TEAM_SENSITIVE: [SSN, CREDIT_CARD, IBAN, EIN, DATE, PHONE, EMAIL]
+#   it_light:
+#     DEFAULT_MIN_CONF: 0.80
+#     TEAM_SENSITIVE: [CREDIT_CARD, IBAN]
