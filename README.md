@@ -9,7 +9,7 @@
 
 If you do not have Python or do not want to install anything:
 
-1. Download the folder repository.
+1. Download the repository.
 2. Inside that folder, double-click **`run.bat`**.
    - First run only: sets up a local environment and downloads required libraries and optionally the AI model.
    - Later runs: skips downloads and starts the app immediately.
